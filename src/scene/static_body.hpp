@@ -15,6 +15,7 @@ namespace jleg{
             static_body(jleg::vec2 _position, jleg::vec2 _size);
             jleg::vec2 size;
             b2Body* body;
+            void update();
     };
 }
 

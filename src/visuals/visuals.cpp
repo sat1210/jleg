@@ -1,5 +1,9 @@
 #include "visuals.hpp"
 
+namespace jleg{
+    glm::mat4 proj;
+}
+
 const unsigned int SCREEN_WIDTH = 1280;
 const unsigned int SCREEN_HEIGHT = 720;
 const unsigned int SCALE = 2;
@@ -10,13 +14,11 @@ jleg::sprite_drawer jleg::drawer;
 std::vector<jleg::sprite*> jleg::sprites;
 GLFWwindow* jleg::window;
 jleg::camera jleg::cam;
-// jleg::node* jleg::root_node;
-
-
 
 
 void jleg::register_sprite(jleg::sprite* _sprite){
     jleg::sprites.push_back(_sprite);
+    _sprite->drawer = jleg::drawer;
 };
 
 
@@ -25,10 +27,8 @@ void jleg::start_loop(jleg::scene_graph _graph){
     float delta;
     unsigned int framecount = 0;
 
-    // jleg::node* last_node = jleg::root_node;
     std::vector<jleg::node*> node_queue;
     std::vector<jleg::node*> node_buffer;
-    // std::vector<jleg::sprite*> sprite_queue;
 
     while(!glfwWindowShouldClose(window)){
         glfwPollEvents();
@@ -53,30 +53,24 @@ void jleg::start_loop(jleg::scene_graph _graph){
             glClear(GL_COLOR_BUFFER_BIT);
 
             shader_program.activate();
-            cam.matrix(shader_program, "proj");
+            glUniformMatrix4fv(glGetUniformLocation(shader_program.id, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
+            // cam.matrix(shader_program, "proj");
 
-            for (sprite* _sprite : sprites){
-                drawer.draw(_sprite);
+            node_queue.push_back(_graph.get_root_node()); //root
+            node_buffer.push_back(_graph.get_root_node()); //root
+
+
+            while (node_buffer.size() > 0){
+                for (node* _child : node_buffer.back()->get_children()){
+                    _child->update();
+                    node_queue.push_back(_child);
+                    node_buffer.insert(node_buffer.begin(), _child);
+                };
+                node_buffer.pop_back();
             };
 
-            // node_queue.push_back(_graph.get_root_node()); //root
-            // node_buffer.push_back(_graph.get_root_node()); //root
-            //
-            //
-            // while (node_buffer.size() > 0){
-            //     for (node* _child : node_buffer.back()->get_children()){
-            //         node_queue.push_back(_child);
-            //         node_buffer.insert(node_buffer.begin(), _child);
-            //     };
-            //     node_buffer.pop_back();
-            // };
-
-            // if (_child->renderable()){
-            //     sprite* tmp = _child;
-            //     sprite_queue.push_back(tmp);
-            // };
-            // node_queue.clear();
-            // node_buffer.clear();
+            node_queue.clear();
+            node_buffer.clear();
 
     		glfwSwapBuffers(window);
         };
@@ -107,11 +101,10 @@ int jleg::create_window(){
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    // shader shader_program("res/shaders/sprite.vert", "res/shaders/sprite.frag");
     shader_program = shader("res/shaders/sprite.vert", "res/shaders/sprite.frag");
-    cam = camera(SCREEN_WIDTH / SCALE, SCREEN_HEIGHT / SCALE, vec2(0.0f, 0.0f));//mvoe to scene?
+    // cam = camera(SCREEN_WIDTH / SCALE, SCREEN_HEIGHT / SCALE, vec2(0.0f, 0.0f));//mvoe to scene?
+    proj = glm::ortho(0.0f, (float)SCREEN_WIDTH / SCALE, (float)SCREEN_HEIGHT / SCALE, 0.0f, -1.0f, 1.0f);
 
-    // sprite_drawer drawer(&shader_program);
     drawer = sprite_drawer(&shader_program);
 
     return 0;

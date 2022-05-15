@@ -28,6 +28,7 @@ namespace jleg{
     extern sprite_drawer drawer;
     extern camera cam;
     extern node* root_node;
+    extern glm::mat4 proj;
 
     void register_sprite(jleg::sprite* _sprite);
     void start_loop(jleg::scene_graph _graph);

@@ -1,29 +1,47 @@
 #include "node.hpp"
 
-jleg::node::node(){
-    // do nothing
-};
+namespace jleg{
+    node::node(){
+        // do nothing
+    };
 
-void jleg::node::add_child(node *_node){
-    this->children.push_back(_node);
-    _node->parent = this;
-};
+    void node::add_child(node *_node){
+        this->children.push_back(_node);
+        _node->parent = this;
+    };
 
-std::vector<jleg::node*> jleg::node::get_children(){
-    return this->children;
-};
+    std::vector<node*> node::get_children(){
+        return this->children;
+    };
 
-jleg::vec2 jleg::node::get_pos(){
-    return this->position;
-};
+    vec2 node::get_pos(){
+        return this->position;
+    };
 
-void jleg::node::set_pos(jleg::vec2 _vec2){
-    this->position = _vec2;
-};
+    void node::set_pos(vec2 _vec2){
+        this->position = _vec2;
+    };
 
-void jleg::node::process(float delta){};
-void jleg::node::physics_process(float delta){};
-void jleg::node::update(){};
-// bool jleg::node::renderable(){
-//     return false;
-// };
+    void node::process(float delta){};
+    void node::physics_process(float delta){};
+    void node::update(){};
+
+    glm::mat4 node::get_local_model_matrix(){
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(this->position.to_glm(), 0.0f));
+        // model = glm::translate(model, glm::vec3(_sprite->tex.offset.to_glm(), 0.0f));
+        // model = glm::scale(model, glm::vec3(_sprite->tex.size.to_glm(), 0.0f));
+        return model;
+    };
+
+    glm::mat4 node::get_global_model_matrix(){
+        glm::mat4 model = glm::mat4(1.0f);
+        if (this->parent){
+            model = this->parent->get_global_model_matrix() * this->get_local_model_matrix();
+        }
+        else {
+            model = this->get_local_model_matrix();
+        };
+        return model;
+    };
+};

@@ -20,6 +20,7 @@ namespace jleg{
             glm::mat4 cam_matrix = glm::mat4(1.0f);
             int width;
             int height;
+            bool current = false;
 
             camera();
             camera(int _width, int _height, jleg::vec2 _position);

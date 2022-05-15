@@ -17,11 +17,11 @@ namespace game{
 };
 
 void jleg::game_physics_loop(){
-    vec2 player_position = vec2(game::player.body->GetPosition());
-    vec2 ground_position = vec2(game::ground.body->GetPosition());
-    game::platform.position = ground_position * vec2(1.0f, -1.0f) * jleg::cell_size;
-    game::knight.position = player_position * vec2(1.0f, -1.0f) * jleg::cell_size;
-    std::cout << game::knight.position.x << " " << game::knight.position.y << std::endl;
+    // vec2 player_position = vec2(game::player.body->GetPosition());
+    // vec2 ground_position = vec2(game::ground.body->GetPosition());
+    // game::platform.position = ground_position * vec2(1.0f, -1.0f) * jleg::cell_size;
+    // game::knight.position = player_position * vec2(1.0f, -1.0f) * jleg::cell_size;
+    // std::cout << game::knight.position.x << " " << game::knight.position.y << std::endl;
     float dir = 0.0;
     if (is_action_pressed("d")){
         dir += 1.0f;

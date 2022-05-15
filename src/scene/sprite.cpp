@@ -9,7 +9,7 @@ namespace jleg{
         this->tex = texture(_texture);
     };
 
-    sprite::update(){
-        // do nothing, yet
+    void sprite::update(){
+        drawer.draw(this->tex, this->get_global_model_matrix());
     };
-}
+};

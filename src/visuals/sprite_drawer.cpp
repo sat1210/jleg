@@ -30,16 +30,16 @@ jleg::sprite_drawer::sprite_drawer(shader* _shader){
 };
 
 
-void jleg::sprite_drawer::draw(jleg::sprite* _sprite){
+void jleg::sprite_drawer::draw(texture _texture, glm::mat4 _model){
     glActiveTexture(0);
-    glBindTexture(GL_TEXTURE_2D, _sprite->tex.id);
+    glBindTexture(GL_TEXTURE_2D, _texture.id);
     glUniform1i(glGetUniformLocation(this->sprite_shader->id, "tex"), 0);
 
     //calculate model matrix
-    glm::mat4 model = glm::mat4(1.0f);
-    model = glm::translate(model, glm::vec3(_sprite->position.to_glm(), 0.0f));
-    model = glm::translate(model, glm::vec3(_sprite->tex.offset.to_glm(), 0.0f));
-    model = glm::scale(model, glm::vec3(_sprite->tex.size.to_glm(), 0.0f));
+    glm::mat4 model = _model;
+    // model = glm::translate(model, glm::vec3(_sprite->position.to_glm(), 0.0f));
+    model = glm::translate(model, glm::vec3(_texture.offset.to_glm(), 0.0f));
+    model = glm::scale(model, glm::vec3(_texture.size.to_glm(), 0.0f));
 
     glUniformMatrix4fv(glGetUniformLocation(sprite_shader->id, "model"), 1, GL_FALSE, glm::value_ptr(model));
 

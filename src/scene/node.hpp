@@ -4,6 +4,11 @@
 #include <vector>
 #include "vec2.hpp"
 #include "transform.hpp"
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/gtx/rotate_vector.hpp"
+#include "glm/gtx/vector_angle.hpp"
 
 namespace jleg{
     class node{
@@ -15,13 +20,15 @@ namespace jleg{
             int id;
             node();
             jleg::vec2 get_pos();
+
             void set_pos(jleg::vec2 _vec2);
             void add_child(node *_node);
             virtual void process(float delta);
             virtual void physics_process(float delta);
             virtual void update();
             std::vector<node*> get_children();
-            // virtual bool renderable(); //fix
+            glm::mat4 get_local_model_matrix();
+            glm::mat4 get_global_model_matrix();
     };
 };
 
