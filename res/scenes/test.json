@@ -1,0 +1,16 @@
+{
+    "name" : "parentnode",
+    "type" : "node",
+    "children" : [
+        {
+            "name" : "childnode1",
+            "type" : "node",
+            "children" : []
+        },
+        {
+            "name" : "childnode2",
+            "type" : "node",
+            "children" : []
+        },
+    ]
+}
