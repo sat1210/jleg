@@ -4,11 +4,6 @@ namespace jleg{
     glm::mat4 proj;
 }
 
-const unsigned int SCREEN_WIDTH = 1280;
-const unsigned int SCREEN_HEIGHT = 720;
-const unsigned int SCALE = 2;
-const unsigned int FRAME_RATE = 60;
-
 jleg::shader jleg::shader_program;
 jleg::sprite_drawer jleg::drawer;
 std::vector<jleg::sprite*> jleg::sprites;
@@ -30,6 +25,13 @@ void jleg::start_loop(jleg::scene_graph _graph){
     std::vector<jleg::node*> node_queue;
     std::vector<jleg::node*> node_buffer;
 
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 330");
+
     while(!glfwWindowShouldClose(window)){
         glfwPollEvents();
 
@@ -37,20 +39,20 @@ void jleg::start_loop(jleg::scene_graph _graph){
         delta = cur_time - prev_time;
         framecount++;
 
-        // jleg::game_render_loop();
-
         if (delta >= jleg::time_step){
             jleg::step();
 
-            // jleg::game_physics_loop();
-
-            std::string title = "Jleg Window " + std::to_string(1.0 / delta);
+            std::string title = game_name + " " + std::to_string(1.0 / delta);
             glfwSetWindowTitle(window, title.c_str());
 
             prev_time = cur_time;
 
             glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
+
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
 
             shader_program.activate();
             glUniformMatrix4fv(glGetUniformLocation(shader_program.id, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
@@ -72,9 +74,23 @@ void jleg::start_loop(jleg::scene_graph _graph){
             node_queue.clear();
             node_buffer.clear();
 
+            char target[255];
+
+            ImGui::Begin("Console Window");
+            ImGui::Text("Console Content");
+            ImGui::InputText("Console Input", target, sizeof(target));
+            std::cout << target << std::endl;
+            ImGui::End();
+
+            ImGui::Render();
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
     		glfwSwapBuffers(window);
         };
     };
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
     shader_program.remove();
     glfwDestroyWindow(window);
     glfwTerminate();
@@ -87,7 +103,7 @@ int jleg::create_window(){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "jleg window", NULL, NULL);
+    window = glfwCreateWindow(screen_width, screen_height, "jleg window", NULL, NULL);
 
     if (window == NULL){
         glfwTerminate();
@@ -96,14 +112,14 @@ int jleg::create_window(){
 
     glfwMakeContextCurrent(window);
     gladLoadGL();
-    glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    glViewport(0, 0, screen_width, screen_height);
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     shader_program = shader("res/shaders/sprite.vert", "res/shaders/sprite.frag");
     // cam = camera(SCREEN_WIDTH / SCALE, SCREEN_HEIGHT / SCALE, vec2(0.0f, 0.0f));//mvoe to scene?
-    proj = glm::ortho(0.0f, (float)SCREEN_WIDTH / SCALE, (float)SCREEN_HEIGHT / SCALE, 0.0f, -1.0f, 1.0f);
+    proj = glm::ortho(0.0f, (float)screen_width / screen_scale, (float)screen_height / screen_scale, 0.0f, -1.0f, 1.0f);
 
     drawer = sprite_drawer(&shader_program);
 

@@ -4,7 +4,7 @@ namespace jleg{
     float cell_size = 16;
     int velocity_iterations = 1;
     int position_iterations = 1;
-    float time_step = 1.0f / 60.0f;
+    float time_step = 1.0f / 144.0f;
     vec2 gravity = vec2(0.0f, -32.0f);
     b2World world(gravity.to_box2d());
     void init_physics(vec2 _gravity){

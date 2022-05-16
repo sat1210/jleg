@@ -1,0 +1,7 @@
+{
+    "game_name" : "Jleg Test Project",
+    "screen_width" : 1280,
+    "screen_height" : 720,
+    "screen_scale" : 2.0,
+    "frame_rate" : 60
+}

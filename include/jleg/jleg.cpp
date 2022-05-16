@@ -1,29 +1,24 @@
+#include "jleg.hpp"
+#include "nlohmann/json.hpp"
 
-// void jleg::init_engine(){
-//     jleg::init_visuals();
-//     jleg::init_physics();
-//     jleg::init_game();
-//     while (!jleg::should_close){
-//         jleg::engine_loop();
-//         jleg::game_loop();
-//     };
-//
-// };
-//
-// void jleg::engine_loop(){
-//     jleg::render();
-//     jleg::step();
-// };
-//
-// void jleg::init_game(){
-//     //setup nodes
-// };
-//
-// void jleg::init(){
-//     init_engine();
-//     init_game();
-//     while(!jleg::should_close){
-//         engine_loop();
-//         game_loop() ;
-//     };
-// }
+namespace jleg{
+    int screen_width;
+    int screen_height;
+    float screen_scale;
+    std::string game_name;
+
+    void init(){
+        std::cout << "Jleg Engine work in progress build" << std::endl;
+
+        std::ifstream config_file("res/configs/config.json");
+        nlohmann::json config_json;
+        config_file >> config_json;
+
+        screen_width = config_json["screen_width"];
+        screen_height = config_json["screen_height"];
+        screen_scale = config_json["screen_scale"];
+        game_name = config_json["game_name"];
+
+        jleg::create_window();
+    };
+};

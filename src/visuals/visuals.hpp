@@ -2,6 +2,9 @@
 #define VISUALS_HPP
 
 //graphics libraries
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 #include "string"
@@ -29,6 +32,13 @@ namespace jleg{
     extern camera cam;
     extern node* root_node;
     extern glm::mat4 proj;
+
+    extern int screen_width;
+    extern int screen_height;
+    extern float screen_scale;
+    extern std::string game_name;
+
+    // extern int FRAME_RATE = 60;
 
     void register_sprite(jleg::sprite* _sprite);
     void start_loop(jleg::scene_graph _graph);

@@ -40,6 +40,17 @@ jleg::vec2 jleg::vec2::operator*(jleg::vec2 _by){
     return vec2(this->x * _by.x, this->y * _by.y);
 };
 
+std::string jleg::vec2::printable(){
+    std::string output;
+    output = "(" + std::to_string(this->x) + ", " + std::to_string(this->y) + ")";
+    return output;
+};
+
+// std::ostream& operator<<(std::ostream& os, const jleg::vec2 &_vec){
+//     os << "(" << ((float)((int)_vec.x*100)/100.0f)  << ", " << ((float)((int)_vec.y*100)/100.0f) << ")";
+//     return os;
+// };
+
 // void jleg::vec2::from_box2d(b2Vec2 _b2vec2){
 //     this->x = _b2vec2.x;
 //     this->y = _b2vec2.y;

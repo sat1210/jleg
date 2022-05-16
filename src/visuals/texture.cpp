@@ -9,37 +9,29 @@ jleg::texture::texture(const char* _texture){
     stbi_set_flip_vertically_on_load(true);
     unsigned char* bytes = stbi_load(_texture, &width_img, &height_img, &num_col_ch, 0);
 
-    std::cout << "1" << std::endl;
 
     glGenTextures(1, &id);
-    std::cout << "a" << std::endl;
     glActiveTexture(0);
-    std::cout << "b" << std::endl;
     glBindTexture(GL_TEXTURE_2D, id);
 
-    std::cout << "2" << std::endl;
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 
-    std::cout << "3" << std::endl;
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_img, height_img, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
     glGenerateMipmap(GL_TEXTURE_2D);
 
-    std::cout << "4" << std::endl;
 
     stbi_image_free(bytes);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    std::cout << "5" << std::endl;
 
     this->size = vec2((float) width_img, (float) height_img);
     this->offset = vec2(this->size.x * -0.5f, this->size.y * -0.5f);
 
-    std::cout << "6" << std::endl;
 };
 
 void jleg::texture::remove(){
