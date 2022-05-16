@@ -9,6 +9,7 @@
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtx/rotate_vector.hpp"
 #include "glm/gtx/vector_angle.hpp"
+#include "iostream"
 
 namespace jleg{
     class node{
@@ -27,6 +28,7 @@ namespace jleg{
             virtual void physics_process(float delta);
             virtual void update();
             std::vector<node*> get_children();
+            node* get_parent();
             glm::mat4 get_local_model_matrix();
             glm::mat4 get_global_model_matrix();
     };

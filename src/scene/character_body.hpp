@@ -6,6 +6,7 @@
 #include "node.hpp"
 #include "vec2.hpp"
 #include "physics.hpp"
+#include "logger.hpp"
 
 
 namespace jleg{
@@ -16,8 +17,11 @@ namespace jleg{
             character_body();
             character_body(jleg::vec2 _position, jleg::vec2 _size);
             void set_velocity(jleg::vec2 _velocity);
+            vec2 get_velocity();
             bool is_on_floor();
-            void update();
+            virtual void update();
+            void process(float delta);
+            virtual void physics_process(float delta);
     };
 };
 

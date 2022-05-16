@@ -8,10 +8,15 @@ namespace jleg{
     void node::add_child(node *_node){
         this->children.push_back(_node);
         _node->parent = this;
+        std::cout << _node << std::endl;
     };
 
     std::vector<node*> node::get_children(){
         return this->children;
+    };
+
+    node* node::get_parent(){
+        return this->parent;
     };
 
     vec2 node::get_pos(){

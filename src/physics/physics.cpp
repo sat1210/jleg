@@ -18,6 +18,7 @@ namespace jleg{
         //jank but cant be bothered
         b2BodyDef body_def;
         b2PolygonShape box;
+        b2FixtureDef fixture;
         //maybe a local variable?
         //no
         b2Body* _body;
@@ -28,13 +29,19 @@ namespace jleg{
                 _body = world.CreateBody(&body_def);
                 _body->SetFixedRotation(true);
                 box.SetAsBox(_size.x / 2.0f / cell_size, _size.y / 2.0f / cell_size);
-                _body->CreateFixture(&box, 1.0f);
+                fixture.shape = &box;
+                fixture.friction = 0.0f;
+                fixture.density = 1.0f;
+                _body->CreateFixture(&fixture);
                 break;
             case STATIC_BODY:
                 body_def.position.Set(_position.x / cell_size, _position.y / cell_size);
                 _body = world.CreateBody(&body_def);
                 box.SetAsBox(_size.x / 2.0f / cell_size, _size.y / 2.0f / cell_size);
-                _body->CreateFixture(&box, 0.0f);
+                fixture.shape = &box;
+                fixture.friction = 0.0f;
+                fixture.density = 1.0f;
+                _body->CreateFixture(&fixture);
                 break;
         };
         return _body;

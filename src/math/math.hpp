@@ -1,3 +1,6 @@
-//math
 #include "vec2.hpp"
-//math
+
+namespace jleg{
+    float min(float _a, float _b);
+    float abs(float value);
+};

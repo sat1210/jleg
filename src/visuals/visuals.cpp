@@ -37,12 +37,12 @@ void jleg::start_loop(jleg::scene_graph _graph){
         delta = cur_time - prev_time;
         framecount++;
 
-        jleg::game_render_loop();
+        // jleg::game_render_loop();
 
         if (delta >= jleg::time_step){
             jleg::step();
 
-            jleg::game_physics_loop();
+            // jleg::game_physics_loop();
 
             std::string title = "Jleg Window " + std::to_string(1.0 / delta);
             glfwSetWindowTitle(window, title.c_str());
@@ -54,7 +54,6 @@ void jleg::start_loop(jleg::scene_graph _graph){
 
             shader_program.activate();
             glUniformMatrix4fv(glGetUniformLocation(shader_program.id, "proj"), 1, GL_FALSE, glm::value_ptr(proj));
-            // cam.matrix(shader_program, "proj");
 
             node_queue.push_back(_graph.get_root_node()); //root
             node_buffer.push_back(_graph.get_root_node()); //root
@@ -63,6 +62,7 @@ void jleg::start_loop(jleg::scene_graph _graph){
             while (node_buffer.size() > 0){
                 for (node* _child : node_buffer.back()->get_children()){
                     _child->update();
+                    _child->physics_process(time_step);
                     node_queue.push_back(_child);
                     node_buffer.insert(node_buffer.begin(), _child);
                 };

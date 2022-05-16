@@ -15,4 +15,19 @@ namespace jleg{
     void character_body::update(){
         this->position = vec2(this->body->GetPosition()) * vec2(1.0f, -1.0f) * cell_size;
     };
+
+    void character_body::set_velocity(jleg::vec2 _velocity){
+        this->body->SetLinearVelocity(_velocity.to_box2d());
+    };
+
+    vec2 character_body::get_velocity(){
+        return vec2(this->body->GetLinearVelocity());
+    };
+
+    void character_body::process(float delta){
+        //do nothing
+    };
+    void character_body::physics_process(float delta){
+        //do nothing
+    };
 };
