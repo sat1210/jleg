@@ -2,7 +2,7 @@
 
 namespace jleg{
     glm::mat4 proj;
-}
+};
 
 jleg::shader jleg::shader_program;
 jleg::sprite_drawer jleg::drawer;
@@ -60,11 +60,17 @@ void jleg::start_loop(jleg::scene_graph _graph){
             node_queue.push_back(_graph.get_root_node()); //root
             node_buffer.push_back(_graph.get_root_node()); //root
 
+            ImGui::Begin("Debug Data");
+            ImGui::Text(("Fps : " + std::to_string(1.0 / delta)).c_str());
+            ImGui::Text("=== Node Positions ===");
+            // char target[255];
+            // ImGui::InputText("Console Input", target, sizeof(target));
 
             while (node_buffer.size() > 0){
                 for (node* _child : node_buffer.back()->get_children()){
                     _child->update();
                     _child->physics_process(time_step);
+                    ImGui::Text((_child->name + " at position " + _child->get_position().printable()).c_str());
                     node_queue.push_back(_child);
                     node_buffer.insert(node_buffer.begin(), _child);
                 };
@@ -74,12 +80,8 @@ void jleg::start_loop(jleg::scene_graph _graph){
             node_queue.clear();
             node_buffer.clear();
 
-            char target[255];
 
-            ImGui::Begin("Console Window");
-            ImGui::Text("Console Content");
-            ImGui::InputText("Console Input", target, sizeof(target));
-            std::cout << target << std::endl;
+            // std::cout << target << std::endl;
             ImGui::End();
 
             ImGui::Render();

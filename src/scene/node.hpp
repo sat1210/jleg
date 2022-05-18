@@ -10,6 +10,7 @@
 #include "glm/gtx/rotate_vector.hpp"
 #include "glm/gtx/vector_angle.hpp"
 #include "iostream"
+#include <iostream>
 
 namespace jleg{
     class node{
@@ -18,11 +19,12 @@ namespace jleg{
             std::vector<node*> children;
             jleg::vec2 position;
             jleg::vec2 transform;
+            std::string name;
             int id;
             node();
-            jleg::vec2 get_pos();
+            jleg::vec2 get_position();
 
-            void set_pos(jleg::vec2 _vec2);
+            void set_position(jleg::vec2 _vec2);
             void add_child(node *_node);
             virtual void process(float delta);
             virtual void physics_process(float delta);

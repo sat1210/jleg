@@ -11,10 +11,12 @@
 #include "node.hpp"
 #include "sprite.hpp"
 #include "static_body.hpp"
+#include "tilemap.hpp"
+#include "scene_graph.hpp"
 
-namespace jleg{
-    extern node* root;
-};
+// namespace jleg{
+//     extern node* root;
+// };
 
 #endif
 

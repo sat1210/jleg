@@ -30,7 +30,7 @@ jleg::texture::texture(const char* _texture){
 
 
     this->size = vec2((float) width_img, (float) height_img);
-    this->offset = vec2(this->size.x * -0.5f, this->size.y * -0.5f);
+    // this->offset = vec2(this->size.x * -0.5f, this->size.y * -0.5f);
 
 };
 

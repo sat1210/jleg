@@ -2,10 +2,11 @@
 
 namespace jleg{
     static_body::static_body(){
-        //do nothing
+        this->name = "StaticBody";
     };
 
     static_body::static_body(vec2 _position, vec2 _size){
+        this->name = "StaticBody";
         this->size = _size;
         this->position = _position;
 

@@ -5,6 +5,7 @@ set(SCENE_HEADERS
     character_body.hpp
     static_body.hpp
     scene_graph.hpp
+    tilemap.hpp
 )
 
 set(SCENE_SOURCES
@@ -14,6 +15,7 @@ set(SCENE_SOURCES
     character_body.cpp
     static_body.cpp
     scene_graph.cpp
+    tilemap.cpp
 )
 
 target_sources(jleg PUBLIC

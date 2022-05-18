@@ -15,7 +15,8 @@ namespace jleg{
         public:
             GLuint id;
             vec2 size;
-            vec2 offset;
+            // vec2 offset;
+            bool centered = false;
             texture();
             texture(const char* _texture);
             void remove();

@@ -2,13 +2,13 @@
 
 namespace jleg{
     node::node(){
-        // do nothing
+        this->name = "Node";
     };
 
     void node::add_child(node *_node){
+        std::cout << _node->name << std::endl;
         this->children.push_back(_node);
         _node->parent = this;
-        std::cout << _node << std::endl;
     };
 
     std::vector<node*> node::get_children(){
@@ -19,11 +19,11 @@ namespace jleg{
         return this->parent;
     };
 
-    vec2 node::get_pos(){
+    vec2 node::get_position(){
         return this->position;
     };
 
-    void node::set_pos(vec2 _vec2){
+    void node::set_position(vec2 _vec2){
         this->position = _vec2;
     };
 

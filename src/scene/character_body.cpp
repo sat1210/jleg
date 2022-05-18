@@ -2,10 +2,11 @@
 
 namespace jleg{
     character_body::character_body(){
-        //do nothing
+        this->name = "CharacterBody";
     };
 
     character_body::character_body(vec2 _position, vec2 _size){
+        this->name = "CharacterBody";
         this->size = _size;
         this->position = _position;
 

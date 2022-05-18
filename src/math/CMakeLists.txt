@@ -1,11 +1,13 @@
 set(MATH_HEADERS
-    vec2.hpp
     math.hpp
+    vec2.hpp
+    vec2i.hpp
 )
 
 set(MATH_SOURCES
-    vec2.cpp
     math.cpp
+    vec2.cpp
+    vec2i.cpp
 )
 
 target_sources(jleg PUBLIC

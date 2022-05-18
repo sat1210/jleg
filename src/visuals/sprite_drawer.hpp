@@ -20,6 +20,10 @@ namespace jleg{
     class sprite_drawer{
         public:
             GLfloat vertices[20] = {
+                // -0.5f, 0.5f, 0.0f,		0.0f, 0.0f,
+                // -0.5f, -0.5f, 0.0f,		0.0f, 1.0f,
+                // 0.5f, -0.5f, 0.0f,		1.0f, 1.0f,
+                // 0.5f, 0.5f, 0.0f,	    1.0f, 0.0f
                0.0f, 1.0f, 0.0f,		0.0f, 0.0f,
                0.0f, 0.0f, 0.0f,		0.0f, 1.0f,
                1.0f, 0.0f, 0.0f,		1.0f, 1.0f,

@@ -38,7 +38,10 @@ void jleg::sprite_drawer::draw(texture _texture, glm::mat4 _model){
     //calculate model matrix
     glm::mat4 model = _model;
     // model = glm::translate(model, glm::vec3(_sprite->position.to_glm(), 0.0f));
-    model = glm::translate(model, glm::vec3(_texture.offset.to_glm(), 0.0f));
+    // model = glm::translate(model, glm::vec3(_texture.offset.to_glm(), 0.0f));
+    if (_texture.centered){
+        model = glm::translate(model, glm::vec3(_texture.size.to_glm() * -0.5f, 0.0f));
+    };
     model = glm::scale(model, glm::vec3(_texture.size.to_glm(), 0.0f));
 
     glUniformMatrix4fv(glGetUniformLocation(sprite_shader->id, "model"), 1, GL_FALSE, glm::value_ptr(model));

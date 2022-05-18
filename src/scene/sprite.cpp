@@ -2,11 +2,13 @@
 
 namespace jleg{
     sprite::sprite(){
-        //do nothing
+        this->name = "Sprite";
     };
 
     sprite::sprite(const char* _texture){
+        this->name = "Sprite";
         this->tex = texture(_texture);
+        this->tex.centered = true;
     };
 
     void sprite::update(){
