@@ -1,3 +1,5 @@
-a shitty 2d game engine thats probably breaking atleast 10 code writing conventions
+A bad 2D game engine for learning about GLFW and how game engines work
 
-not suitable at all for commercial use yet
+Inspired by Godot and the Source Engine
+
+Code quality will be overhauled soon, possibly replacing the confusing namespace pattern and instead implementing singletons like Godot

@@ -31,8 +31,8 @@ namespace game{
         new_vel.x += dir * 4.0f;
         new_vel.x = new_vel.x * this->damp;
         this->set_velocity(new_vel);
-        if (jleg::is_mouse_pressed("mouse1")){
-            this->set_position(jleg::get_mouse_position());
-        };
+        // if (jleg::is_mouse_pressed("mouse1")){
+        //     this->set_position(jleg::get_mouse_position());
+        // };
     };
 };
