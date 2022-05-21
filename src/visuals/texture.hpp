@@ -7,7 +7,7 @@
 
 #include "shader.hpp"
 #include "vec2.hpp"
-#include "logger.hpp"
+#include "log.hpp"
 #include <string>
 
 namespace jleg{

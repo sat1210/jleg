@@ -14,7 +14,8 @@ namespace jleg{
     };
 
     void character_body::update(){
-        this->position = vec2(this->body->GetPosition()) * vec2(1.0f, -1.0f) * cell_size;
+        // this->position = vec2(this->body->GetPosition()) * vec2(1.0f, -1.0f) * cell_size;
+        this->position = get_body_position(this->body);
     };
 
     void character_body::set_velocity(jleg::vec2 _velocity){

@@ -5,6 +5,8 @@
 #include "node.hpp"
 #include "texture.hpp"
 #include "sprite_drawer.hpp"
+#include "visuals.hpp"
+#include "log.hpp"
 
 namespace jleg{
     class sprite : public node{

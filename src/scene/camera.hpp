@@ -12,6 +12,7 @@
 #include "shader.hpp"
 #include "node.hpp"
 #include "vec2.hpp"
+#include "visuals.hpp"
 
 namespace jleg{
     class camera : public node{
@@ -24,7 +25,8 @@ namespace jleg{
 
             camera();
             camera(int _width, int _height, jleg::vec2 _position);
-            void matrix(shader& shader, const char* uniform);
+            // void matrix(shader& shader, const char* uniform);
+            void update();
     };
 };
 

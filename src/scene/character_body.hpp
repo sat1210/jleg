@@ -6,7 +6,7 @@
 #include "node.hpp"
 #include "vec2.hpp"
 #include "physics.hpp"
-#include "logger.hpp"
+#include "log.hpp"
 
 
 namespace jleg{

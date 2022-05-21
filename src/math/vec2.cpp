@@ -12,6 +12,12 @@ namespace jleg{
         this->y = _y;
     };
 
+    vec2::vec2(double _x, double _y){
+        this->x = (float)_x;
+        this->y = (float)_y;
+    };
+
+
     vec2::vec2(b2Vec2 _b2vec2){
         this->x = _b2vec2.x;
         this->y = _b2vec2.y;

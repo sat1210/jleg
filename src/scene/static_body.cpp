@@ -10,10 +10,11 @@ namespace jleg{
         this->size = _size;
         this->position = _position;
 
-        this->body = create_body(STATIC_BODY, this->position, this->size);
+        this->body = create_body(STATIC_BODY, this->position, this->size); //set to physics
     };
 
     void static_body::update(){
-        this->position = vec2(this->body->GetPosition()) * vec2(1.0f, -1.0f) * cell_size;
+        // this->position = vec2(this->body->GetPosition()) * vec2(1.0f, -1.0f) * cell_size;
+        this->position = get_body_position(this->body);
     };
 };

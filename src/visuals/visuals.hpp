@@ -10,10 +10,10 @@
 #include "string"
 //nodes
 #include "node.hpp"
-#include "camera.hpp"
-#include "character_body.hpp"
-#include "static_body.hpp"
-#include "sprite.hpp"
+// #include "camera.hpp"
+// #include "character_body.hpp"
+// #include "static_body.hpp"
+// #include "sprite.hpp"
 #include "scene_graph.hpp"
 //visuals
 #include "shader.hpp"
@@ -21,15 +21,16 @@
 #include "texture.hpp"
 //other componenets
 #include "physics.hpp"
-#include "game.hpp"
+// #include "game.hpp"
 #include <iostream>
+#include "log.hpp"
 
 namespace jleg{
     extern GLFWwindow* window;
-    extern std::vector<jleg::sprite*> sprites;
+    // extern std::vector<jleg::sprite*> sprites;
     extern shader shader_program;
     extern sprite_drawer drawer;
-    extern camera cam;
+    // extern camera cam;
     extern node* root_node;
     extern glm::mat4 proj;
 
@@ -40,7 +41,7 @@ namespace jleg{
 
     // extern int FRAME_RATE = 60;
 
-    void register_sprite(jleg::sprite* _sprite);
+    // void register_sprite(jleg::sprite* _sprite);
     void start_loop(jleg::scene_graph _graph);
     int create_window();
 };

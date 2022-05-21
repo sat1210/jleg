@@ -2,20 +2,17 @@
 
 namespace jleg{
     glm::mat4 proj;
+    shader shader_program;
+    sprite_drawer drawer;
+    GLFWwindow* window;
 };
 
-jleg::shader jleg::shader_program;
-jleg::sprite_drawer jleg::drawer;
-std::vector<jleg::sprite*> jleg::sprites;
-GLFWwindow* jleg::window;
-jleg::camera jleg::cam;
-
-
-void jleg::register_sprite(jleg::sprite* _sprite){
-    jleg::sprites.push_back(_sprite);
-    _sprite->drawer = jleg::drawer;
-};
-
+// std::vector<jleg::sprite*> sprites;
+// jleg::camera jleg::cam;
+// void jleg::register_sprite(jleg::sprite* _sprite){
+    //     // jleg::sprites.push_back(_sprite);
+    //     _sprite->drawer = jleg::drawer;
+    // };
 
 void jleg::start_loop(jleg::scene_graph _graph){
     float prev_time = 0.0;
@@ -32,6 +29,8 @@ void jleg::start_loop(jleg::scene_graph _graph){
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 330");
 
+    log("seggs");
+
     while(!glfwWindowShouldClose(window)){
         glfwPollEvents();
 
@@ -42,8 +41,7 @@ void jleg::start_loop(jleg::scene_graph _graph){
         if (delta >= jleg::time_step){
             jleg::step();
 
-            std::string title = game_name + " " + std::to_string(1.0 / delta);
-            glfwSetWindowTitle(window, title.c_str());
+            glfwSetWindowTitle(window, game_name.c_str());
 
             prev_time = cur_time;
 
@@ -65,6 +63,7 @@ void jleg::start_loop(jleg::scene_graph _graph){
             ImGui::Text("=== Node Positions ===");
             // char target[255];
             // ImGui::InputText("Console Input", target, sizeof(target));
+            // std::cout << target << std::endl;
 
             while (node_buffer.size() > 0){
                 for (node* _child : node_buffer.back()->get_children()){
@@ -77,11 +76,11 @@ void jleg::start_loop(jleg::scene_graph _graph){
                 node_buffer.pop_back();
             };
 
+
             node_queue.clear();
             node_buffer.clear();
 
 
-            // std::cout << target << std::endl;
             ImGui::End();
 
             ImGui::Render();
@@ -120,7 +119,6 @@ int jleg::create_window(){
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     shader_program = shader("res/shaders/sprite.vert", "res/shaders/sprite.frag");
-    // cam = camera(SCREEN_WIDTH / SCALE, SCREEN_HEIGHT / SCALE, vec2(0.0f, 0.0f));//mvoe to scene?
     proj = glm::ortho(0.0f, (float)screen_width / screen_scale, (float)screen_height / screen_scale, 0.0f, -1.0f, 1.0f);
 
     drawer = sprite_drawer(&shader_program);

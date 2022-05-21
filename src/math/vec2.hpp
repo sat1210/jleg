@@ -14,6 +14,7 @@ namespace jleg{
             float y;
             vec2();
             vec2(float _x, float _y);
+            vec2(double _x, double _y);
             vec2(b2Vec2 _b2vec2);
             vec2(glm::vec2 _glmvec2);
             b2Vec2 to_box2d();

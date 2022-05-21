@@ -9,9 +9,10 @@ namespace jleg{
         this->name = "Sprite";
         this->tex = texture(_texture);
         this->tex.centered = true;
+        this->drawer = jleg::drawer;
     };
 
     void sprite::update(){
-        drawer.draw(this->tex, this->get_global_model_matrix());
+        this->drawer.draw(this->tex, this->get_global_model_matrix());
     };
 };

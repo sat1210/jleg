@@ -33,6 +33,8 @@ namespace jleg{
 
     glm::mat4 node::get_local_model_matrix(){
         glm::mat4 model = glm::mat4(1.0f);
+        // model = glm::scale(model, glm::vec3(_texture.size.to_glm(), 0.0f));
+
         model = glm::translate(model, glm::vec3(this->position.to_glm(), 0.0f));
         // model = glm::translate(model, glm::vec3(_sprite->tex.offset.to_glm(), 0.0f));
         // model = glm::scale(model, glm::vec3(_sprite->tex.size.to_glm(), 0.0f));

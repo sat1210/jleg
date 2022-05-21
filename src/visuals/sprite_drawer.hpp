@@ -12,7 +12,7 @@
 #include "glm/gtx/rotate_vector.hpp"
 #include "glm/gtx/vector_angle.hpp"
 
-#include "logger.hpp"
+#include "log.hpp"
 #include <string>
 #include "texture.hpp"
 

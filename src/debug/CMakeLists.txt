@@ -1,9 +1,9 @@
 set(DEBUG_HEADERS
-    logger.hpp
+    log.hpp
 )
 
 set(DEBUG_SOURCES
-    logger.cpp
+    log.cpp
 )
 
 target_sources(jleg PUBLIC
