@@ -52,6 +52,11 @@ namespace jleg{
         return vec2(this->x * _by.x, this->y * _by.y);
     };
 
+    vec2 vec2::operator/(float _by){
+        return vec2(this->x / _by, this->y / _by);
+    };
+
+
     std::string vec2::printable(){
         std::string output;
         output = "(" + std::to_string(this->x) + ", " + std::to_string(this->y) + ")";

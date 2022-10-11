@@ -17,12 +17,21 @@ namespace jleg{
         public:
             tilemap();
             tilemap(vec2 _position);
-            vec2i size = vec2i(16, 16);
+            vec2i size = vec2i(8, 8);
             // tileset tiles;
             //tile data is initialised with random numbers
-            int tile_data[256];//upper left to bottom right
+            int tile_data[64] = {//upper left to bottom right
+                0, 0, 0, 0, 1, 0, 0, 0,
+                0, 0, 0, 1, 1, 0, 0, 0,
+                0, 0, 1, 1, 1, 0, 0, 0,
+                0, 1, 1, 1, 1, 0, 0, 0,
+                1, 1, 0, 0, 0, 0, 0, 0,
+                1, 1, 0, 0, 0, 0, 0, 0,
+                1, 1, 0, 0, 0, 0, 0, 0,
+                1, 1, 1, 1, 1, 1, 1, 1
+            };
             std::vector<texture> textures;
-            b2Body* tile_bodies[256];
+            b2Body* tile_bodies[64];
             void set_texture(int id, texture _tex);
             sprite_drawer drawer; //set global renderer somewhere
             void set_cell(vec2i _pos, int _id);

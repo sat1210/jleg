@@ -10,14 +10,18 @@ namespace jleg{
         this->name = "TileMap";
         this->position = _position;
         this->drawer = jleg::drawer;
-        for (int i = 0; i < 256; i++){
-            this->tile_data[i] = 0; //initialize data to not read from garbage values
+
+        for (int i = 0; i < 64; i++){
+            // this->tile_data[i] = 0; //initialize data to not read from garbage values
             //thanks c++
-            vec2 tile_pos;
-            tile_pos.x = (float)(i % this->size.x);
-            tile_pos.y = (float)(i / this->size.x);
-            tile_pos = tile_pos * 16.0f;
-            this->tile_bodies[i] = create_body(STATIC_BODY, this->position + tile_pos + vec2(8.0f, 8.0f), vec2(16.0f, 16.0f));
+            int tile_id = this->tile_data[i];
+            if (tile_id != 0){
+                vec2 tile_pos;
+                tile_pos.x = (float)(i % this->size.x);
+                tile_pos.y = (float)(i / this->size.x);
+                tile_pos = tile_pos * 16.0f;
+                this->tile_bodies[i] = create_body(STATIC_BODY, this->position + tile_pos + vec2(8.0f, 8.0f), vec2(16.0f, 16.0f));
+            };
         };
     };
 
@@ -34,9 +38,9 @@ namespace jleg{
 
 
     void tilemap::update(){
-        for (int i = 0; i < 256; i++){
+        for (int i = 0; i < 64; i++){
             int tile_id = this->tile_data[i];
-            if (tile_id != -1){
+            if (tile_id != 0){
                 texture tex = this->textures[0]; //fail here
                 vec2 tile_pos;
                 tile_pos.x = (float)(i % this->size.x);

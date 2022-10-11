@@ -17,7 +17,7 @@ namespace jleg{
     vec2 get_mouse_position(){
         double mouse_x, mouse_y;
         glfwGetCursorPos(window, &mouse_x, &mouse_y);
-        return vec2(mouse_x, mouse_y);
+        return vec2(mouse_x, mouse_y) / jleg::screen_scale;
     };
 
     bool is_mouse_pressed(std::string name){

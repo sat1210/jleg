@@ -25,6 +25,7 @@ namespace jleg{
             vec2 operator*(float _by);
             vec2 operator*(vec2 _by);
             vec2 operator+(vec2i _by);
+            vec2 operator/(float _by);
     };
 };
 
